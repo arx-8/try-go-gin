@@ -4,6 +4,7 @@
 
 ```sh
 go mod init github.com/arx-8/try-go-gin
+go get -u github.com/gin-gonic/gin
 ```
 
 # Refs
