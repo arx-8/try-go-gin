@@ -3,6 +3,7 @@ package handlers
 import (
 	"net/http"
 
+	"github.com/arx-8/try-go-gin/src/handlers/requests"
 	"github.com/arx-8/try-go-gin/src/model"
 	"github.com/arx-8/try-go-gin/src/service"
 	"github.com/gin-gonic/gin"
@@ -11,6 +12,7 @@ import (
 type BooksHandlerInterface interface {
 	GetList(context *gin.Context)
 	GetByID(context *gin.Context)
+	PostNew(context *gin.Context)
 }
 
 type BooksHandler struct {
@@ -50,4 +52,20 @@ func (h *BooksHandler) GetByID(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, book)
+}
+
+func (h *BooksHandler) PostNew(c *gin.Context) {
+	var req requests.PostNewBook
+	if err := c.Bind(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": err.Error(),
+		})
+		return
+	}
+
+	id := h.bookService.Add(req.ToPlain())
+
+	c.JSON(http.StatusCreated, gin.H{
+		"id": id.ToInt(),
+	})
 }

@@ -16,7 +16,7 @@ func main() {
 		booksRoute := r.Group("books")
 		booksHandler := handlers.NewBooksHandler(service.BookService{})
 		booksRoute.GET("", booksHandler.GetList)
-		booksRoute.POST("")
+		booksRoute.POST("", booksHandler.PostNew)
 		booksRoute.GET("/:id", booksHandler.GetByID)
 		booksRoute.PUT("/:id")
 		booksRoute.DELETE("/:id")

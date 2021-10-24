@@ -13,3 +13,27 @@ GET http://localhost:8080/books/99999999
 
 #### expect error
 GET http://localhost:8080/books/a
+
+###
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+    "title": "The 1"
+}
+
+#### another
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+    "title": "The 2",
+    "content": "bla bla bla"
+}
+
+#### expect error
+POST http://localhost:8080/books
+
+{
+    "content": "bla bla bla"
+}

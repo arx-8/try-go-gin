@@ -37,3 +37,17 @@ func (BookService) GetByID(id model.BookID) (*model.Book, error) {
 
 	return nil, ErrRecordNotFound("ID:" + id.ToString() + " is not found.")
 }
+
+func (BookService) Add(data struct {
+	Title   string
+	Content string
+}) model.BookID {
+	nextID := model.BookID(books[len(books)-1].ID.ToInt() + 1)
+
+	books = append(
+		books,
+		*model.NewBook(nextID, data.Title, data.Content),
+	)
+
+	return nextID
+}
