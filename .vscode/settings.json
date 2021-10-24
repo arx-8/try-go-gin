@@ -2,7 +2,6 @@
   "editor.formatOnSave": true,
   "files.encoding": "utf8",
   "files.eol": "\n",
-  "files.insertFinalNewline": true,
 
   // Project specific
   "files.associations": {
