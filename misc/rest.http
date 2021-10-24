@@ -1,21 +1,21 @@
 
 ###
-GET http://localhost:8080/healthz
+GET http://127.0.0.1:8080/healthz
 
 ### Get List
-GET http://localhost:8080/books
+GET http://127.0.0.1:8080/books
 
 ### Get One
-GET http://localhost:8080/books/1
+GET http://127.0.0.1:8080/books/1
 
 #### expect error
-GET http://localhost:8080/books/99999999
+GET http://127.0.0.1:8080/books/99999999
 
 #### expect error
-GET http://localhost:8080/books/a
+GET http://127.0.0.1:8080/books/a
 
 ### POST
-POST http://localhost:8080/books
+POST http://127.0.0.1:8080/books
 Content-Type: application/json
 
 {
@@ -23,7 +23,7 @@ Content-Type: application/json
 }
 
 #### another
-POST http://localhost:8080/books
+POST http://127.0.0.1:8080/books
 Content-Type: application/json
 
 {
@@ -32,7 +32,7 @@ Content-Type: application/json
 }
 
 #### expect error
-POST http://localhost:8080/books
+POST http://127.0.0.1:8080/books
 Content-Type: application/json
 
 {
@@ -40,7 +40,7 @@ Content-Type: application/json
 }
 
 ### Put
-PUT http://localhost:8080/books/2
+PUT http://127.0.0.1:8080/books/2
 Content-Type: application/json
 
 {
@@ -49,4 +49,8 @@ Content-Type: application/json
 }
 
 ### Delete
-DELETE http://localhost:8080/books/2
+DELETE http://127.0.0.1:8080/books/2
+
+###
+GET http://127.0.0.1:8080/auth
+authorization: eyJraWQiOiJ5eWtzQ2xuVEFcL1Y0Z05tQzFtdENudzdnQXFwcmN5ckNhdXNIQ2JXZDJFMD0iLCJhbGciOiJSUzI1NiJ9.eyJvcmlnaW5fanRpIjoiYzhkYzFkNjUtMzY5MC00YjY4LWFhMjctMTM5NTIxNjZkZGI0Iiwic3ViIjoiOGExNGJmMzMtOGI0Zi00YjY0LTliNmQtZGEwMjk2ZmI5YzJlIiwiZXZlbnRfaWQiOiI5MjAzYTBiNy0yNzJkLTQ5NGUtODYwYS05OTQ1ZjBjNDI2NWEiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJzY29wZSI6ImF3cy5jb2duaXRvLnNpZ25pbi51c2VyLmFkbWluIiwiYXV0aF90aW1lIjoxNjM0OTU3Mzk5LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuYXAtbm9ydGhlYXN0LTEuYW1hem9uYXdzLmNvbVwvYXAtbm9ydGhlYXN0LTFfNENGZG5scVlHIiwiZXhwIjoxNjM1MDkxMzAxLCJpYXQiOjE2MzUwODc3MDEsImp0aSI6IjVkZDM4M2I0LTUwN2QtNDkwMi04YTJkLWY5NTY1MmY2YTNlNSIsImNsaWVudF9pZCI6IjJwOGkyMTUzNTdrY21sMWlmMGJsbXRvMDcxIiwidXNlcm5hbWUiOiI4YTE0YmYzMy04YjRmLTRiNjQtOWI2ZC1kYTAyOTZmYjljMmUifQ.NOuJkc4bJaS1mS94pG2zpixeAwzO800NVH32l-E0XieNFPS4f7KVWdbnDDm67bV6cMUoeKwGeErlDEFPgrOoxyLmWO5FNhPZPdVqDdvXm-BgAGH51I1n3n3W_2pMcveGFaBCxPizhWEb1t0I05XKDs2uQAzLeaaxaST0VkCZJHKR08ZZSnI0DoyjFbQKUPyzpKUNm0oEPopSpXTD5nHlcc9CIacFeinRCRFqeJGUvaZAGFSBv_OtGGTgkXDBv-9Z6h5ZE_Et_s-7LpHhjscKQdp51Dt2mlxWJypLmKU4kUGNQBoA0umywEqgwFn4JTohjlU0K6emUZIg-6njzpRVVw
