@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/arx-8/try-go-gin/src/handler/books"
 	"github.com/arx-8/try-go-gin/src/middleware"
 	"github.com/gin-gonic/gin"
 )
@@ -12,7 +13,7 @@ func main() {
 
 	booksRoute := r.Group("books")
 
-	booksRoute.GET("")
+	booksRoute.GET("", books.GetList)
 	booksRoute.POST("")
 	booksRoute.GET("/:id")
 	booksRoute.PUT("/:id")
