@@ -12,5 +12,5 @@
   /**
    * Extensions
    */
-  "cSpell.words": ["gonic"]
+  "cSpell.words": ["gonic", "healthz"]
 }
