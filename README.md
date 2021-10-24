@@ -8,6 +8,13 @@ go get -u github.com/gin-gonic/gin
 go mod tidy
 ```
 
+# TODO
+
+- [x] debugger
+- [ ] CORS
+- [ ] UT
+- [ ] Cognito
+
 # Refs
 
 - [go mod 完全に理解した](https://zenn.dev/optimisuke/articles/105feac3f8e726830f8c)
