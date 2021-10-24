@@ -1,4 +1,4 @@
-package books
+package handlers
 
 import (
 	"net/http"
@@ -8,10 +8,21 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var bookService = service.BookService{}
+type BooksHandlerInterface interface {
+	GetList(context *gin.Context)
+	GetByID(context *gin.Context)
+}
 
-func GetList(c *gin.Context) {
-	books := bookService.GetList()
+type BooksHandler struct {
+	bookService service.BookService
+}
+
+func NewBooksHandler(bookService service.BookService) BooksHandlerInterface {
+	return &BooksHandler{bookService: bookService}
+}
+
+func (h *BooksHandler) GetList(c *gin.Context) {
+	books := h.bookService.GetList()
 
 	c.JSON(http.StatusOK, gin.H{
 		"data":               books,
@@ -19,7 +30,7 @@ func GetList(c *gin.Context) {
 	})
 }
 
-func GetByID(c *gin.Context) {
+func (h *BooksHandler) GetByID(c *gin.Context) {
 	idParam := c.Param("id")
 
 	id, err := model.BookIDFromString(idParam)
@@ -30,7 +41,7 @@ func GetByID(c *gin.Context) {
 		return
 	}
 
-	book, err := bookService.GetByID(id)
+	book, err := h.bookService.GetByID(id)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{
 			"message": err.Error(),

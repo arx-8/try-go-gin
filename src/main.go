@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/arx-8/try-go-gin/src/handler/books"
+	"github.com/arx-8/try-go-gin/src/handlers"
 	"github.com/arx-8/try-go-gin/src/middleware"
+	"github.com/arx-8/try-go-gin/src/service"
 	"github.com/gin-gonic/gin"
 )
 
@@ -11,13 +12,15 @@ func main() {
 
 	r.Use(middleware.RecordUaAndTime)
 
-	booksRoute := r.Group("books")
-
-	booksRoute.GET("", books.GetList)
-	booksRoute.POST("")
-	booksRoute.GET("/:id", books.GetByID)
-	booksRoute.PUT("/:id")
-	booksRoute.DELETE("/:id")
+	{
+		booksRoute := r.Group("books")
+		booksHandler := handlers.NewBooksHandler(service.BookService{})
+		booksRoute.GET("", booksHandler.GetList)
+		booksRoute.POST("")
+		booksRoute.GET("/:id", booksHandler.GetByID)
+		booksRoute.PUT("/:id")
+		booksRoute.DELETE("/:id")
+	}
 
 	r.GET("/healthz", func(c *gin.Context) {
 		c.Done()
