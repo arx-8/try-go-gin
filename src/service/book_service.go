@@ -68,3 +68,22 @@ func (s BookService) DeleteByID(id model.BookID) error {
 
 	return nil
 }
+
+func (BookService) UpdateByID(
+	id model.BookID,
+	data struct {
+		Title   string
+		Content string
+	},
+) error {
+	for i := 0; i < len(books); i++ {
+		v := &books[i]
+		if v.ID == id {
+			v.Title = data.Title
+			v.Content = data.Content
+			return nil
+		}
+	}
+
+	return ErrRecordNotFound("ID:" + id.ToString() + " is not found.")
+}

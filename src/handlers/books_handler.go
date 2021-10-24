@@ -14,6 +14,7 @@ type BooksHandlerInterface interface {
 	GetByID(context *gin.Context)
 	PostNew(context *gin.Context)
 	Delete(context *gin.Context)
+	Put(context *gin.Context)
 }
 
 type BooksHandler struct {
@@ -82,7 +83,7 @@ func (h *BooksHandler) Delete(c *gin.Context) {
 	}
 
 	if err := h.bookService.DeleteByID(id); err != nil {
-		// TODO どうやって NotFound とその他のエラーを見分ける？
+		// TODO どうやって NotFound とその他のエラーを見分ける？ errors.Is, errors.As ?
 		c.JSON(http.StatusServiceUnavailable, gin.H{
 			"message": err.Error(),
 		})
@@ -90,4 +91,33 @@ func (h *BooksHandler) Delete(c *gin.Context) {
 	}
 
 	c.Status(http.StatusNoContent)
+}
+
+func (h *BooksHandler) Put(c *gin.Context) {
+	idParam := c.Param("id")
+	id, err := model.BookIDFromString(idParam)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Invalid ID:" + idParam,
+		})
+		return
+	}
+
+	var req requests.PostNewBook
+	if err := c.Bind(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": err.Error(),
+		})
+		return
+	}
+
+	if err := h.bookService.UpdateByID(id, req.ToPlain()); err != nil {
+		// TODO どうやって NotFound とその他のエラーを見分ける？ errors.Is, errors.As ?
+		c.JSON(http.StatusServiceUnavailable, gin.H{
+			"message": err.Error(),
+		})
+		return
+	}
+
+	c.Status(http.StatusOK)
 }

@@ -18,7 +18,7 @@ func main() {
 		booksRoute.GET("", booksHandler.GetList)
 		booksRoute.POST("", booksHandler.PostNew)
 		booksRoute.GET("/:id", booksHandler.GetByID)
-		booksRoute.PUT("/:id")
+		booksRoute.PUT("/:id", booksHandler.Put)
 		booksRoute.DELETE("/:id", booksHandler.Delete)
 	}
 

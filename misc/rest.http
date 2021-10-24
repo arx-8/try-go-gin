@@ -33,9 +33,19 @@ Content-Type: application/json
 
 #### expect error
 POST http://localhost:8080/books
+Content-Type: application/json
 
 {
     "content": "bla bla bla"
+}
+
+### Put
+PUT http://localhost:8080/books/2
+Content-Type: application/json
+
+{
+    "title": "Updated title",
+    "content": "Updated content"
 }
 
 ### Delete
