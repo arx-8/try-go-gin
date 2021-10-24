@@ -1,0 +1,15 @@
+
+###
+GET http://localhost:8080/healthz
+
+###
+GET http://localhost:8080/books
+
+###
+GET http://localhost:8080/books/1
+
+#### expect error
+GET http://localhost:8080/books/99999999
+
+#### expect error
+GET http://localhost:8080/books/a

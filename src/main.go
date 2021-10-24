@@ -15,7 +15,7 @@ func main() {
 
 	booksRoute.GET("", books.GetList)
 	booksRoute.POST("")
-	booksRoute.GET("/:id")
+	booksRoute.GET("/:id", books.GetByID)
 	booksRoute.PUT("/:id")
 	booksRoute.DELETE("/:id")
 
@@ -23,6 +23,5 @@ func main() {
 		c.Done()
 	})
 
-	r.Run(":8080") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
-	// You can access `curl http://localhost:8080/healthz`
+	r.Run(":8080")
 }
