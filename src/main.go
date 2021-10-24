@@ -19,7 +19,7 @@ func main() {
 		booksRoute.POST("", booksHandler.PostNew)
 		booksRoute.GET("/:id", booksHandler.GetByID)
 		booksRoute.PUT("/:id")
-		booksRoute.DELETE("/:id")
+		booksRoute.DELETE("/:id", booksHandler.Delete)
 	}
 
 	r.GET("/healthz", func(c *gin.Context) {

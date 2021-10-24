@@ -13,6 +13,7 @@ type BooksHandlerInterface interface {
 	GetList(context *gin.Context)
 	GetByID(context *gin.Context)
 	PostNew(context *gin.Context)
+	Delete(context *gin.Context)
 }
 
 type BooksHandler struct {
@@ -68,4 +69,25 @@ func (h *BooksHandler) PostNew(c *gin.Context) {
 	c.JSON(http.StatusCreated, gin.H{
 		"id": id.ToInt(),
 	})
+}
+
+func (h *BooksHandler) Delete(c *gin.Context) {
+	idParam := c.Param("id")
+	id, err := model.BookIDFromString(idParam)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "Invalid ID:" + idParam,
+		})
+		return
+	}
+
+	if err := h.bookService.DeleteByID(id); err != nil {
+		// TODO どうやって NotFound とその他のエラーを見分ける？
+		c.JSON(http.StatusServiceUnavailable, gin.H{
+			"message": err.Error(),
+		})
+		return
+	}
+
+	c.Status(http.StatusNoContent)
 }

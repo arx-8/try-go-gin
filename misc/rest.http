@@ -2,10 +2,10 @@
 ###
 GET http://localhost:8080/healthz
 
-###
+### Get List
 GET http://localhost:8080/books
 
-###
+### Get One
 GET http://localhost:8080/books/1
 
 #### expect error
@@ -14,7 +14,7 @@ GET http://localhost:8080/books/99999999
 #### expect error
 GET http://localhost:8080/books/a
 
-###
+### POST
 POST http://localhost:8080/books
 Content-Type: application/json
 
@@ -37,3 +37,6 @@ POST http://localhost:8080/books
 {
     "content": "bla bla bla"
 }
+
+### Delete
+DELETE http://localhost:8080/books/2

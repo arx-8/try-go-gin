@@ -51,3 +51,20 @@ func (BookService) Add(data struct {
 
 	return nextID
 }
+
+func (s BookService) DeleteByID(id model.BookID) error {
+	_, err := s.GetByID(id)
+	if err != nil {
+		return err
+	}
+
+	newList := []model.Book{}
+	for _, v := range books {
+		if v.ID != id {
+			newList = append(newList, v)
+		}
+	}
+	books = newList
+
+	return nil
+}
