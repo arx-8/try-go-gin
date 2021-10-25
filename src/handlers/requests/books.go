@@ -17,3 +17,10 @@ func (p PostNewBook) ToPlain() struct {
 		Content: p.Content,
 	}
 }
+
+type GetBooks struct {
+	Start int    `form:"_start"`
+	End   int    `form:"_end"`
+	Sort  string `form:"_sort"`
+	Order string `form:"_order"`
+}

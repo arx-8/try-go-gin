@@ -5,6 +5,12 @@ GET http://127.0.0.1:8080/healthz
 ### Get List
 GET http://127.0.0.1:8080/books
 
+### With query
+GET http://127.0.0.1:8080/books?id=100&_start=1&_end=1&_end=30
+
+### With query error
+GET http://127.0.0.1:8080/books?id=100&_start=1&_end=www
+
 ### Get One
 GET http://127.0.0.1:8080/books/1
 

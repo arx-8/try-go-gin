@@ -1,7 +1,9 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
+	"reflect"
 
 	"github.com/arx-8/try-go-gin/src/handlers/requests"
 	"github.com/arx-8/try-go-gin/src/model"
@@ -26,6 +28,19 @@ func NewBooksHandler(bookService service.BookService) BooksHandlerInterface {
 }
 
 func (h *BooksHandler) GetList(c *gin.Context) {
+	// get query params
+	var getBooks requests.GetBooks
+
+	if err := c.ShouldBindQuery(&getBooks); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": err.Error(),
+		})
+		return
+	} else {
+		fmt.Println(getBooks)
+		fmt.Println(reflect.TypeOf(getBooks.Start))
+	}
+
 	books := h.bookService.GetList()
 
 	c.JSON(http.StatusOK, gin.H{
